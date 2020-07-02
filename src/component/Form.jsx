@@ -8,11 +8,19 @@ function Form() {
     let [address, setAddress] = useState("");
     let [birthdate, setBirthdate] = useState("");
     let [gender, setGender] = useState("");
-    let [skill, setSkill] = useState("");
+    let [skill, setSkill] = useState([]);
 
     function handleSubmit() {
         alert(
-            `${name}, ${email},${password} , ${address} , ${birthdate},${gender},${skill}`
+            `
+            Profil :
+            Name : ${name}
+            Email :${email}
+            Password : ${password} 
+            Address : ${address}
+            Birthdate : ${birthdate}
+            Gender : ${gender}
+            Skills: ${skill}`
         );
     }
     return (
@@ -20,7 +28,7 @@ function Form() {
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    placeholder="Fullname"
+                    placeholder="fullname"
                     onChange={(event) => {
                         setName(event.target.value);
                     }}
@@ -59,7 +67,7 @@ function Form() {
                 ></textarea>
 
                 <input
-                    type="text"
+                    type="date"
                     name="birthdate"
                     placeholder="birthdate"
                     onChange={(event) => {
@@ -78,20 +86,57 @@ function Form() {
                     <input type="radio" name="gender" value="male" />
                     <label htmlFor="male">Male</label>
                 </div>
-                <div
-                    onChange={(event) => {
-                        setSkill(event.target.value);
-                    }}
-                >
-                    <input type="checkbox" name="skill" value="coding" />
+                <div>
+                    <input
+                        type="checkbox"
+                        name="skill"
+                        value="coding"
+                        onChange={(event) => {
+                            if (event.target.checked) {
+                                setSkill([...skill, event.target.value]);
+                            } else {
+                                setSkill(
+                                    skill.filter(
+                                        (skills) =>
+                                            skills !== event.target.value
+                                    )
+                                );
+                            }
+                        }}
+                    />
                     <label htmlFor="coding">Coding</label>
-                    <input type="checkbox" name="skill" value="design" />
+                    <input
+                        type="checkbox"
+                        name="skill"
+                        value="design"
+                        onChange={(event) => {
+                            if (event.target.checked) {
+                                setSkill([...skill, event.target.value]);
+                            } else {
+                                setSkill(
+                                    skill.filter(
+                                        (skills) =>
+                                            skills !== event.target.value
+                                    )
+                                );
+                            }
+                        }}
+                    />
                     <label htmlFor="design">Design</label>
                     <input
                         type="checkbox"
                         name="skill"
                         onChange={(event) => {
-                            setSkill(event.target.value);
+                            if (event.target.checked) {
+                                setSkill([...skill, event.target.value]);
+                            } else {
+                                setSkill(
+                                    skill.filter(
+                                        (skills) =>
+                                            skills !== event.target.value
+                                    )
+                                );
+                            }
                         }}
                         value="gaming"
                     />
